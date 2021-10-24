@@ -7,12 +7,27 @@ const routes = [
   {
     path: '/',
     name: 'Inicio',
-    component: () => import('@/views/Inicio.vue')
+    component: () => import('@/views/LandingPage/LandingPageInicio.vue')
   },
   {
     path: '/nosotros',
     name: 'Nosotros',
-    component: () => import('@/views/Nosotros.vue')
+    component: () => import('@/views/LandingPage/LandingPageNosotros.vue')
+  },
+  {
+    path: '/inicio-sesion',
+    name: 'InicioSesion',
+    component: () => import('@/views/Usuario/UsuarioInicioSesion.vue')
+  },
+  {
+    path: '/registro',
+    name: 'Registro',
+    component: () => import('@/views/Usuario/UsuarioRegistro.vue')
+  },
+  {
+    path: '/cliente-registro',
+    name: 'ClienteRegistro',
+    component: () => import('@/views/Cliente/ClienteRegistro.vue')
   }
 ]
 

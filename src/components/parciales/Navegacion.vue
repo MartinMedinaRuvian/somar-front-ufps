@@ -16,12 +16,12 @@
       </li>
   
        <li class="nav-item ml-4">
-        <router-link id="btn-ingresar-salir" data-toggle="collapse" data-target=".navbar-collapse.show" to="/ingresar" class="btn btn-outline-success btn-sm">Registrate</router-link> 
+        <router-link id="btn-ingresar-salir" data-toggle="collapse" data-target=".navbar-collapse.show" to="/registro" class="btn btn-outline-success btn-sm">Registrate</router-link> 
        </li>
 
       <li class="nav-item ml-4">
           <span class="mr-3">ó</span>
-       <router-link data-toggle="collapse" data-target=".navbar-collapse.show" to="/contactousuarios" class="color-verde-principal">Iniciar sesión</router-link>
+       <router-link data-toggle="collapse" data-target=".navbar-collapse.show" to="/inicio-sesion" class="color-verde-principal">Iniciar sesión</router-link>
       </li>
 
     </ul>
