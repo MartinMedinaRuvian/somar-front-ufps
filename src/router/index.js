@@ -27,7 +27,14 @@ const routes = [
   {
     path: '/cliente-registro',
     name: 'ClienteRegistro',
-    component: () => import('@/views/Cliente/ClienteRegistro.vue')
+    component: () => import('@/views/Cliente/ClienteRegistro.vue'),
+    props:true
+  },
+  {
+    path: '/cliente-perfil',
+    name: 'ClientePerfil',
+    component: () => import('@/views/Cliente/ClientePerfil.vue'),
+    props:true
   }
 ]
 

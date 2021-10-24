@@ -1,18 +1,19 @@
 <template>
     <div class="text-center container-inicio-sesion">
+        <Mensaje :mensaje="mensaje"/>
         <h1><span>So</span><span class="color-verde-principal">Mar</span></h1>
         <p>Iniciar sesión</p>
         <div class="d-flex justify-content-center align-items-center container">
             <div class="row">
-                <form action="" class="formulario">
+                <form @submit.prevent="iniciarSesion()" class="formulario">
                     <div class="form-group">
-                        <input type="text" placeholder="Usuario" class="form-control">
+                        <input type="text" placeholder="Usuario" class="form-control" v-model="usuario.username">
                     </div>
                     <div class="form-group">
-                        <input type="password" placeholder="Contraseña" class="form-control">
+                        <input type="password" placeholder="Contraseña" class="form-control" v-model="usuario.password">
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-success">Continuar</button>
+                        <button type="submit" class="btn btn-success">Continuar</button>
                     </div>
                 </form>
             </div>
@@ -24,7 +25,37 @@
     </div>
 </template>
 <script>
+import Mensaje from '@/components/Mensaje'
 export default {
-    
+    data() {
+       return{
+           usuario:{},
+           usuarioIngresado:{},
+           mensaje:{ver:false}
+       }
+    },
+    methods:{
+        crearMensaje(contenido, color){
+            this.mensaje.ver = true;
+            this.mensaje.contenido = contenido
+            this.mensaje.color = color
+        },
+        iniciarSesion(){
+            this.axios.post('usuarios/inicio-sesion', this.usuario)
+            .then((respuesta)=>{
+                if(respuesta.status === 200){                    
+                    this.usuarioIngresado = respuesta.data;
+                    console.warn(respuesta)
+                    this.$router.push({ name: 'ClientePerfil', params: {usuario: this.usuarioIngresado }})
+                }
+            })
+            .catch((error) => {
+              this.crearMensaje(error.response.data.mensaje, 'danger')
+            })
+        }
+    },
+    components:{
+        Mensaje
+    }
 }
 </script>

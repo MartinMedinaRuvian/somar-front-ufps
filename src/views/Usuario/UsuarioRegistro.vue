@@ -1,18 +1,19 @@
 <template>
     <div class="text-center container-inicio-sesion">
+        <Mensaje :mensaje="mensaje" />
         <h1><span>So</span><span class="color-verde-principal">Mar</span></h1>
         <p>Registro</p>
         <div class="d-flex justify-content-center align-items-center container">
             <div class="row">
-                <form action="" class="formulario">
+                <form @submit.prevent="guardar()" class="formulario">
                     <div class="form-group">
-                        <input type="text" placeholder="Usuario" class="form-control">
+                        <input type="text" placeholder="Usuario" class="form-control" v-model="usuario.username" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" placeholder="Contraseña" class="form-control">
+                        <input type="password" placeholder="Contraseña" class="form-control" v-model="usuario.password" required>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-success">Continuar</button>
+                        <button type="submit" class="btn btn-success">Continuar</button>
                     </div>
                 </form>
             </div>
@@ -24,7 +25,36 @@
     </div>
 </template>
 <script>
+import Mensaje from '@/components/Mensaje'
 export default {
-    
+    data(){
+        return{
+            usuario:{},
+            usuarioGuardado:{},
+            mensaje:{ver:false}
+        }
+    },
+    methods:{
+        crearMensaje(contenido, color){
+            this.mensaje.ver = true;
+            this.mensaje.contenido = contenido
+            this.mensaje.color = color
+        },
+        guardar(){
+            this.axios.post('usuarios', this.usuario)
+            .then((respuesta)=>{
+                if(respuesta.status === 200){
+                    this.usuarioGuardado = respuesta.data
+                    this.$router.push({ name: 'ClienteRegistro', params: {usuario: this.usuarioGuardado }})
+                }
+            })
+            .catch((error)=>{
+               this.crearMensaje(error.response.data.mensaje, 'danger')
+            })
+        }
+    },
+    components:{
+        Mensaje
+    }
 }
 </script>
