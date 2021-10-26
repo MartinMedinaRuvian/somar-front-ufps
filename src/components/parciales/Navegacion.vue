@@ -8,15 +8,17 @@
 
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
+      
       <li class="nav-item ml-4">
        <router-link data-toggle="collapse" data-target=".navbar-collapse.show" to="/" class="text-dark">Inicio</router-link>
       </li>
+
       <li class="nav-item ml-4">
        <router-link data-toggle="collapse" data-target=".navbar-collapse.show" to="/nosotros" class="text-dark">Acerca de nosotros</router-link>
       </li>
   
        <li class="nav-item ml-4">
-        <router-link id="btn-ingresar-salir" data-toggle="collapse" data-target=".navbar-collapse.show" to="/registro" class="btn btn-outline-success btn-sm">Registrate</router-link> 
+        <router-link id="btn-ingresar-salir" data-toggle="collapse" data-target=".navbar-collapse.show" to="/registro" class="btn btn-outline-success btn-sm btn-registro">Registrate</router-link> 
        </li>
 
       <li class="nav-item ml-4">
