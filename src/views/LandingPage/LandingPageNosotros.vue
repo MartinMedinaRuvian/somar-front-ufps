@@ -1,10 +1,9 @@
 <template>
   <div class="text-center">
-    <h2 class="text-success">Nosotros</h2>
-
-    <div class="row">
+    <h2 class="text-success">Nosotros 👨‍💻</h2>
+    <div class="row mt-5">
       <div class="col-md-4">
-        <div class="card">
+        <div class="card mb-4">
           <div class="card-header">
             <img src="../../assets/martin.png" alt="foto-martin" width="80%">
           </div>
