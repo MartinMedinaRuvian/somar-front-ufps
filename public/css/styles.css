@@ -66,6 +66,12 @@ h1{
     width: 400px;
 }
 
+.footer{
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
 
 .navbar-brand{
     font-size: 25px;
