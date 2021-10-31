@@ -41,7 +41,7 @@ export default {
             this.mensaje.color = color
         },
         iniciarSesion(){
-            this.axios.post('usuarios/inicio-sesion', this.usuario)
+            this.axios.post('usuarios/inicioSesion', this.usuario)
             .then((respuesta)=>{
                 if(respuesta.status === 200){                    
                     this.usuarioIngresado = respuesta.data;

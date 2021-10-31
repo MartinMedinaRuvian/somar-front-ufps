@@ -8,10 +8,10 @@ import VueAxios from 'vue-axios'
 
 // Agregamos la URL base de nuestra API
 //Para conectarse al backend local:
-//axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = 'http://localhost:5000';
 
 //Para conectarse al backend de heroku producción
-axios.defaults.baseURL = 'https://somarufps.herokuapp.com';
+//axios.defaults.baseURL = 'https://somarufps.herokuapp.com';
 
 
 Vue.config.productionTip = false
