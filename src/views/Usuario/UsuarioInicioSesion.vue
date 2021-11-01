@@ -26,6 +26,7 @@
 </template>
 <script>
 import Mensaje from '@/components/Mensaje'
+import { mapActions } from 'vuex'
 export default {
     data() {
        return{
@@ -35,6 +36,7 @@ export default {
        }
     },
     methods:{
+        ...mapActions(['guardarUsuario', 'cerrarSesion']),
         crearMensaje(contenido, color){
             this.mensaje.ver = true;
             this.mensaje.contenido = contenido
@@ -45,13 +47,21 @@ export default {
             .then((respuesta)=>{
                 if(respuesta.status === 200){                    
                     this.usuarioIngresado = respuesta.data;
-                    console.warn(respuesta)
+                    this.guardarUsuarioIngresado();
                     this.$router.push({ name: 'ClientePerfil', params: {usuario: this.usuarioIngresado }})
                 }
             })
             .catch((error) => {
               this.crearMensaje(error.response.data.mensaje, 'danger')
             })
+        },
+        guardarUsuarioIngresado(){
+            if(this.usuarioIngresado.username === 'admin'){
+                this.usuarioIngresado.tipo = 'administrador'
+            }else{
+                this.usuarioIngresado.tipo = 'cliente';
+            }
+            this.guardarUsuario(this.usuarioIngresado)
         }
     },
     components:{
