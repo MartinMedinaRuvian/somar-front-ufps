@@ -34,7 +34,7 @@
       </li>
   
       <li class="nav-item ml-4">
-        <button @click="cerrarSesionUsuario" data-toggle="collapse" data-target=".navbar-collapse.show" class="btn btn-outline-success">Cerrar sesión</button>
+        <button @click="cerrarSesion" data-toggle="collapse" data-target=".navbar-collapse.show" class="btn btn-outline-success">Cerrar sesión</button>
       </li>
 
     </ul>
@@ -45,11 +45,7 @@
 import {mapActions} from 'vuex'
 export default {
   methods:{
-    ...mapActions(['cerrarSesion', 'verUsuarioGuardado']),
-    cerrarSesionUsuario(){
-      this.cerrarSesion();
-      this.verUsuarioGuardado();
-    } 
+    ...mapActions(['cerrarSesion'])
   }
 }
 </script>

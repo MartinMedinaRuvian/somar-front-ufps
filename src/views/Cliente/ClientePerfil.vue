@@ -1,7 +1,7 @@
 <template>
     <div class="text-center">
         <Mensaje :mensaje="mensaje" />
-        <h4>Bienvenido {{ usuarioNombre }}</h4>
+        <h4>Bienvenido {{ usuario === null ? '' : usuario.username }}</h4>
         <p>Mi Perfil</p>
         <div class="d-flex justify-content-center align-items-center container">
             <div class="row">
@@ -37,11 +37,10 @@ export default {
         return{
             cliente:{},
             mensaje:{ver:false},
-            usuario:{}
         }
     },
     computed:{
-        ...mapGetters(['usuarioNombre'])
+        ...mapGetters(['usuario'])
     },
     components:{
         Mensaje

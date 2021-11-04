@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="container">
-    <NavegacionLanding v-if="usuarioId === 0"/>
-    <NavegacionCliente v-if="usuarioId !== 0 && usuarioTipo =='cliente'"/>
-    <NavegacionAdministrador v-if="usuarioId !== 0 && usuarioTipo =='administrador'"/>
+    <NavegacionLanding v-if="usuario === null"/>
+    <NavegacionCliente v-if="usuario !== null && usuario.tipo == 'cliente'"/>
+    <NavegacionAdministrador v-if="usuario !== null && usuario.tipo =='administrador'"/>
     <router-view class="contenedor-vistas"/>
     <Footer/>
   </div>
@@ -21,7 +21,7 @@ export default {
     Footer 
   },
   computed:{
-    ...mapGetters(['usuarioId', 'usuarioTipo'])
+    ...mapGetters(['usuario'])
   }
   
 }

@@ -55,7 +55,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next)=>{
   const rutaProtegida = to.matched.some(record=> record.meta.requiereAutorizacion);
 
-  if(rutaProtegida && store.state.usuarioCodigo === 0){
+  if(rutaProtegida && store.state.usuario === null){
     next({name:'InicioSesion'})
   }else{
     next();
