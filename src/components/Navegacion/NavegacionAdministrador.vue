@@ -14,7 +14,7 @@
       </li>
 
       <li class="nav-item ml-4">
-       <router-link data-toggle="collapse" data-target=".navbar-collapse.show" to="/cliente-perfil" class="text-dark">Insumos</router-link>
+       <router-link data-toggle="collapse" data-target=".navbar-collapse.show" to="/insumos" class="text-dark">Insumos</router-link>
       </li>
 
       <li class="nav-item ml-4">
@@ -34,7 +34,7 @@
       </li>
   
       <li class="nav-item ml-4">
-        <button @click="cerrarSesion" data-toggle="collapse" data-target=".navbar-collapse.show" class="btn btn-outline-success">Cerrar sesión</button>
+        <button @click="cerrarSesionUsuario" data-toggle="collapse" data-target=".navbar-collapse.show" class="btn btn-outline-success">Cerrar sesión</button>
       </li>
 
     </ul>
@@ -45,7 +45,11 @@
 import {mapActions} from 'vuex'
 export default {
   methods:{
-    ...mapActions(['cerrarSesion']) 
+    ...mapActions(['cerrarSesion', 'verUsuarioGuardado']),
+    cerrarSesionUsuario(){
+      this.cerrarSesion();
+      this.verUsuarioGuardado();
+    } 
   }
 }
 </script>

@@ -57,6 +57,12 @@ margin:0;
     font-size: 50px;
 }
 
+.tarjeta-insumo{
+    border-radius: 10px;
+    border: solid #00A82D 0.2px;
+    padding: 20px;
+}
+
 h1{
     font-family: "nunito-bold";
 }

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import store from '@/store'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -34,6 +36,12 @@ const routes = [
     path: '/cliente-perfil',
     name: 'ClientePerfil',
     component: () => import('@/views/Cliente/ClientePerfil.vue'),
+    meta:{requiereAutorizacion:true}
+  },
+  {
+    path: '/insumos',
+    name: 'Insumos',
+    component: () => import('@/views/Insumo/Insumo.vue'),
     props:true
   }
 ]
@@ -42,6 +50,16 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next)=>{
+  const rutaProtegida = to.matched.some(record=> record.meta.requiereAutorizacion);
+
+  if(rutaProtegida && store.state.usuarioCodigo === 0){
+    next({name:'InicioSesion'})
+  }else{
+    next();
+  }
 })
 
 export default router

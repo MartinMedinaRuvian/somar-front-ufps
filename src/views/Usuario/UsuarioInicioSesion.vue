@@ -48,7 +48,7 @@ export default {
                 if(respuesta.status === 200){                    
                     this.usuarioIngresado = respuesta.data;
                     this.guardarUsuarioIngresado();
-                    this.$router.push({ name: 'ClientePerfil', params: {usuario: this.usuarioIngresado }})
+                    this.$router.push({ name: 'ClientePerfil'})
                 }
             })
             .catch((error) => {
