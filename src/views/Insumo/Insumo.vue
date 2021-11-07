@@ -21,7 +21,6 @@ export default {
     data(){
         return{
             insumos:[],
-            insumo:{},
             mensaje:{ver:false},
             filtro:''
         }

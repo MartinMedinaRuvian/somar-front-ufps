@@ -55,6 +55,24 @@ const routes = [
     name: 'InsumosEditar',
     component: () => import('@/views/Insumo/InsumoEditar.vue'),
     props:true
+  },
+  {
+    path: '/categorias',
+    name: 'Categorias',
+    component: () => import('@/views/Categoria/Categoria.vue'),
+    props:true
+  },
+  {
+    path: '/categorias-eliminar',
+    name: 'CategoriasEliminar',
+    component: () => import('@/views/Categoria/CategoriaEliminar.vue'),
+    props:true
+  },
+  {
+    path: '/categorias-editar',
+    name: 'CategoriasEditar',
+    component: () => import('@/views/Categoria/CategoriaEditar.vue'),
+    props:true
   }
 ]
 

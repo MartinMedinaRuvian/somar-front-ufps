@@ -1,24 +1,16 @@
 <template>
     <div class="text-center">
-        <h4>Actualizar {{ insumo.descripcion }}</h4>
+        <h4>Actualizar {{ categoria.descripcion }}</h4>
         <div>
         <div class="row">
               <div class="col-lg-12">
-                  <input type="text" class="form-control" placeholder="Descripción" v-model="insumo.descripcion" required>
-              </div>
-          </div>
-          <div class="row mt-2">
-              <div class="col-lg-6">
-                  <input type="number" class="form-control" placeholder="stock" v-model="insumo.stock" required>
-              </div>
-              <div class="col-lg-6">
-                  <input type="number" class="form-control" placeholder="costo unidad" v-model="insumo.costo_unidad" required>
+                  <input type="text" class="form-control" placeholder="Descripción" v-model="categoria.descripcion" required>
               </div>
           </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <button class="btn btn-success" @click="actualizar(insumo.codigo)">Actualizar</button>
+                <button class="btn btn-success" @click="actualizar(categoria.codigo)">Actualizar</button>
             </div>
             <div class="col-md-6">
                 <button class="btn btn-info" @click="cancelar">Cancelar</button>
@@ -32,12 +24,12 @@ import Mensaje from '@/components/Mensaje.vue'
 export default {
     data(){
         return{
-            insumoGuardar:{},
+            categoriaGuardar:{},
             mensaje:{ver:false}
         }
     },
     props:{
-        insumo:Object
+        categoria:Object
     },
     created(){
 
@@ -49,13 +41,13 @@ export default {
             this.mensaje.color = color
         },
         cancelar(){
-            this.$router.push({ name: 'Insumos'})
+            this.$router.push({ name: 'categorias'})
         },
         actualizar(codigo){
-            this.axios.put('insumos/' + codigo, this.insumo)
+            this.axios.put('categorias/' + codigo, this.categoria)
             .then(respuesta=>{
                 if(respuesta.status === 200){
-                    this.$router.push({ name: 'Insumos'})
+                    this.$router.push({ name: 'Categorias'})
                 }
             })
             .catch((error)=>{
