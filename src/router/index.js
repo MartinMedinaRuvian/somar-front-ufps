@@ -43,6 +43,18 @@ const routes = [
     name: 'Insumos',
     component: () => import('@/views/Insumo/Insumo.vue'),
     props:true
+  },
+  {
+    path: '/insumos-eliminar',
+    name: 'InsumosEliminar',
+    component: () => import('@/views/Insumo/InsumoEliminar.vue'),
+    props:true
+  },
+  {
+    path: '/insumos-editar',
+    name: 'InsumosEditar',
+    component: () => import('@/views/Insumo/InsumoEditar.vue'),
+    props:true
   }
 ]
 

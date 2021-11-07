@@ -1,28 +1,50 @@
 <template>
     <div class="text-center">
+        <Mensaje :mensaje="mensaje" />
         <h3>Insumos</h3>
         <div class="d-flex justify-content-center align-items-center container">
-            <form @submit.prevent="buscar()" class="formulario">
-                <input type="text" class="form-control text-center" placeholder="Ingrese insumo 🔍">
-            </form>
+            <input @keypress="verInsumos()" type="text" class="form-control text-center formulario" placeholder="Ingrese insumo" v-model="filtro">
+            <button class="btn btn-outline-success" @click="verInsumos()"><span class="icon-Lupa"></span></button>
         </div>
-        <button type="button" class="btn btn-success mt-3" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" class="btn btn-success mt-3" data-toggle="modal" data-target="#insumoGuardarModal">
             Nuevo
         </button>
-        <ModalGuardar />
-        <div>
-            <h3>Insumos guardados:</h3>
-            <TarjetaInsumo />
-        </div>
+        <ModalGuardarInsumo/>
+        <TablaInsumo :insumos="insumos"/>
     </div>
 </template>
 <script>
-import ModalGuardar from './InsumoModalGuardar.vue'
-import TarjetaInsumo from './TarjetaInsumo.vue'
+import TablaInsumo from './TablaInsumo.vue'
+import ModalGuardarInsumo from './InsumoModalGuardar.vue'
+import Mensaje from '@/components/Mensaje.vue'
 export default {
+    data(){
+        return{
+            insumos:[],
+            insumo:{},
+            mensaje:{ver:false},
+            filtro:''
+        }
+    },
+    created(){
+        this.verInsumos()
+    },
+    methods:{
+        verInsumos(){
+            let filtro = this.filtro
+            this.axios.get('insumos/' + filtro)
+            .then(respuesta =>{
+                this.insumos = respuesta.data
+            })
+            .catch((error)=>{
+                this.crearMensaje(error.response.data.mensaje, 'danger')
+            })
+        }
+    },
     components:{
-        ModalGuardar,
-        TarjetaInsumo
+        TablaInsumo,
+        ModalGuardarInsumo,
+        Mensaje
     }
 }
 </script>
