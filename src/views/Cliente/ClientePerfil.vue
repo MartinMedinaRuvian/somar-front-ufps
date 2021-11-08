@@ -22,7 +22,7 @@
                         <input type="email" placeholder="Email" class="form-control" v-model="cliente.email">
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-success">Actualiza</button>
+                        <button class="btn btn-success" @click="actualizar()">Actualizar</button>
                     </div>
                 </form>
             </div>
@@ -39,8 +39,40 @@ export default {
             mensaje:{ver:false},
         }
     },
+    created(){
+        this.verCliente()
+    },
     computed:{
         ...mapGetters(['usuario'])
+    },
+    methods:{
+        crearMensaje(contenido, color){
+            this.mensaje.ver = true;
+            this.mensaje.contenido = contenido
+            this.mensaje.color = color
+        },
+        verCliente(){
+            this.axios.get('clientes/' + this.usuario.codigo)
+            .then(respuesta =>{
+                if(respuesta.status === 200){
+                  this.cliente = respuesta.data
+                }
+            })
+            .catch((error)=>{
+                this.crearMensaje(error.response.data.mensaje, 'danger')
+            })
+        },
+        actualizar(){
+            this.axios.put('clientes/' + this.cliente.codigo, this.cliente)
+            .then((respuesta)=>{
+                if(respuesta.status === 200){
+                   this.crearMensaje(respuesta.data.mensaje, 'success')
+                }
+            })
+            .catch((error)=>{
+                this.crearMensaje(error.response.data.mensaje, 'danger')
+            })
+        }
     },
     components:{
         Mensaje

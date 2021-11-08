@@ -31,7 +31,6 @@ export default new Vuex.Store({
   },
   getters:{
     usuario(state){
-      console.log(state.usuario)
       return state.usuario
     }
   },

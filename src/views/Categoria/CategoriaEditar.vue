@@ -41,7 +41,7 @@ export default {
             this.mensaje.color = color
         },
         cancelar(){
-            this.$router.push({ name: 'categorias'})
+            this.$router.push({ name: 'Categorias'})
         },
         actualizar(codigo){
             this.axios.put('categorias/' + codigo, this.categoria)
