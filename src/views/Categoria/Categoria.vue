@@ -14,8 +14,8 @@
     </div>
 </template>
 <script>
-import Tabla from './TablaCategoria.vue'
-import ModalGuardar from './CategoriaModalGuardar.vue'
+import Tabla from '@/components/categoria/TablaCategoria.vue'
+import ModalGuardar from '@/components/categoria/CategoriaModalGuardar.vue'
 import Mensaje from '@/components/Mensaje.vue'
 export default {
     data(){

@@ -27,52 +27,58 @@ const routes = [
     component: () => import('@/views/Usuario/UsuarioRegistro.vue')
   },
   {
-    path: '/cliente-registro',
-    name: 'ClienteRegistro',
-    component: () => import('@/views/Cliente/ClienteRegistro.vue'),
+    path: '/persona-registro',
+    name: 'PersonaRegistro',
+    component: () => import('@/views/Persona/PersonaRegistro.vue'),
     props:true
   },
   {
-    path: '/cliente-perfil',
-    name: 'ClientePerfil',
-    component: () => import('@/views/Cliente/ClientePerfil.vue'),
+    path: '/persona-perfil',
+    name: 'PersonaPerfil',
+    component: () => import('@/views/Persona/PersonaPerfil.vue'),
     meta:{requiereAutorizacion:true}
   },
   {
     path: '/insumos',
     name: 'Insumos',
     component: () => import('@/views/Insumo/Insumo.vue'),
-    props:true
+    props:true,
+    meta:{requiereAutorizacion:true}
   },
   {
     path: '/insumos-eliminar',
     name: 'InsumosEliminar',
     component: () => import('@/views/Insumo/InsumoEliminar.vue'),
-    props:true
+    props:true,
+    meta:{requiereAutorizacion:true}
   },
   {
     path: '/insumos-editar',
     name: 'InsumosEditar',
     component: () => import('@/views/Insumo/InsumoEditar.vue'),
-    props:true
+    props:true,
+    meta:{requiereAutorizacion:true}
   },
   {
     path: '/categorias',
     name: 'Categorias',
     component: () => import('@/views/Categoria/Categoria.vue'),
-    props:true
+    props:true,
+    meta:{requiereAutorizacion:true}
   },
   {
     path: '/categorias-eliminar',
     name: 'CategoriasEliminar',
     component: () => import('@/views/Categoria/CategoriaEliminar.vue'),
-    props:true
+    props:true,
+    meta:{requiereAutorizacion:true}
   },
   {
     path: '/categorias-editar',
     name: 'CategoriasEditar',
     component: () => import('@/views/Categoria/CategoriaEditar.vue'),
-    props:true
+    props:true,
+    meta:{requiereAutorizacion:true}
   }
 ]
 

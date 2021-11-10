@@ -10,7 +10,7 @@
     <ul class="navbar-nav ml-auto">
       
       <li class="nav-item ml-4">
-       <router-link data-toggle="collapse" data-target=".navbar-collapse.show" to="/cliente-perfil" class="text-dark">Mi Perfil</router-link>
+       <router-link data-toggle="collapse" data-target=".navbar-collapse.show" to="/persona-perfil" class="text-dark">Mi Perfil</router-link>
       </li>
 
       <li class="nav-item ml-4">

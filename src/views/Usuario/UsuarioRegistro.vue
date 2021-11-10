@@ -45,7 +45,7 @@ export default {
             .then((respuesta)=>{
                 if(respuesta.status === 200){
                     this.usuarioGuardado = respuesta.data
-                    this.$router.push({ name: 'ClienteRegistro', params: {usuario: this.usuarioGuardado }})
+                    this.$router.push({ name: 'PersonaRegistro', params: {usuario: this.usuarioGuardado }})
                 }
             })
             .catch((error)=>{

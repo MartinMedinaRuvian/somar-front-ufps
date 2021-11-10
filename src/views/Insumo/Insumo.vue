@@ -14,8 +14,8 @@
     </div>
 </template>
 <script>
-import TablaInsumo from './TablaInsumo.vue'
-import ModalGuardarInsumo from './InsumoModalGuardar.vue'
+import TablaInsumo from '@/components/insumo/TablaInsumo.vue'
+import ModalGuardarInsumo from '@/components/insumo/InsumoModalGuardar.vue'
 import Mensaje from '@/components/Mensaje.vue'
 export default {
     data(){

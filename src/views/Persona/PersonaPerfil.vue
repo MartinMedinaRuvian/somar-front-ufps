@@ -7,19 +7,19 @@
             <div class="row">
                 <form @submit.prevent="actualizar()" class="formulario">
                     <div class="form-group">
-                        <input type="text" placeholder="Nombres" class="form-control" v-model="cliente.nombres" required>
+                        <input type="text" placeholder="Nombres" class="form-control" v-model="persona.nombres" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" placeholder="Apellidos" class="form-control" v-model="cliente.apellidos" required>
+                        <input type="text" placeholder="Apellidos" class="form-control" v-model="persona.apellidos" required>
                     </div>
                     <div class="form-group">
-                        <input type="number" placeholder="Identificacion" class="form-control" v-model="cliente.identificacion" required>
+                        <input type="number" placeholder="Identificacion" class="form-control" v-model="persona.identificacion" required>
                     </div>
                     <div class="form-group">
-                        <input type="number" placeholder="Teléfono" class="form-control" v-model="cliente.telefono">
+                        <input type="number" placeholder="Teléfono" class="form-control" v-model="persona.telefono">
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Email" class="form-control" v-model="cliente.email">
+                        <input type="email" placeholder="Email" class="form-control" v-model="persona.email">
                     </div>
                     <div class="form-group">
                         <button class="btn btn-success" @click="actualizar()">Actualizar</button>
@@ -35,12 +35,12 @@ import { mapGetters } from 'vuex'
 export default {
     data(){
         return{
-            cliente:{},
+            persona:{},
             mensaje:{ver:false},
         }
     },
     created(){
-        this.verCliente()
+        this.verPersona()
     },
     computed:{
         ...mapGetters(['usuario'])
@@ -51,11 +51,11 @@ export default {
             this.mensaje.contenido = contenido
             this.mensaje.color = color
         },
-        verCliente(){
-            this.axios.get('clientes/' + this.usuario.codigo)
+        verPersona(){
+            this.axios.get('personas/' + this.usuario.codigo)
             .then(respuesta =>{
                 if(respuesta.status === 200){
-                  this.cliente = respuesta.data
+                  this.persona = respuesta.data
                 }
             })
             .catch((error)=>{
@@ -63,7 +63,7 @@ export default {
             })
         },
         actualizar(){
-            this.axios.put('clientes/' + this.cliente.codigo, this.cliente)
+            this.axios.put('personas/' + this.persona.codigo, this.persona)
             .then((respuesta)=>{
                 if(respuesta.status === 200){
                    this.crearMensaje(respuesta.data.mensaje, 'success')
