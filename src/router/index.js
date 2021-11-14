@@ -79,6 +79,13 @@ const routes = [
     component: () => import('@/views/Categoria/CategoriaEditar.vue'),
     props:true,
     meta:{requiereAutorizacion:true}
+  },
+  {
+    path: '/productos',
+    name: 'Productos',
+    component: () => import('@/views/Producto/Producto.vue'),
+    props:true,
+    meta:{requiereAutorizacion:true}
   }
 ]
 
