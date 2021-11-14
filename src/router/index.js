@@ -86,6 +86,13 @@ const routes = [
     component: () => import('@/views/Producto/Producto.vue'),
     props:true,
     meta:{requiereAutorizacion:true}
+  },
+  {
+    path: '/productos-eliminar',
+    name: 'ProductosEliminar',
+    component: () => import('@/views/Producto/ProductoEliminar.vue'),
+    props:true,
+    meta:{requiereAutorizacion:true}
   }
 ]
 

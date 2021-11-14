@@ -1,26 +1,43 @@
 <template>
     <div class="text-center">
         <form @submit.prevent>
-            <div class="form-group">
+
+            <div class="form group">
+                <label for="descripcion">Descripción:</label>
+                <input type="text" placeholder="Descripción" v-model="producto.descripcion" class="form-control">
+            </div>
+
+            <div class="form-group mt-4">
                 <h5>Fotografía producto:</h5>
                 <div class="row">
                     <div class="col-md-6">
                         <input type="file" class="form-control" name="file" id="file" @change="verImagen" accept="image/*" required>
-                        <input @click="subirArchivo()" type="button" value="Subir" class="form-control btn btn-success">
-                        <button class="btn btn-danger form-control" @click="eliminarImagen()">Eliminar</button> 
+                        <input @click="subirArchivo()" type="button" value="Seleccionar" class="form-control btn btn-success mt-3" v-if="urlImg === ''">                      
                     </div>
                     <div class="col-md-6">
-                        <img  alt="imagen" id="imagenPrevisualizacion" width="300px" height="300px">    
+                        <h5>Imagen seleccionada:</h5>
+                        <img  alt="imagen" id="imagenPrevisualizacion" width="200px" height="200px" :src="urlSinFoto">   
+                        <button class="btn btn-danger form-control" @click="eliminarImagen()" v-if="urlImg !==''">Eliminar</button>  
                     </div>
                 </div>
             </div>
-            <input type="text" placeholder="Descripción" v-model="producto.descripcion" class="form-control">
-            <input type="text" placeholder="Precio unidad" v-model="producto.precioUnidad" class="form-control">
 
-            <div class="form-group">
-                <select class="form-select form-control" aria-label="Default select example" v-if="categorias.length > 0" v-model="producto.codigoCategoria">
-                     <option :value="categoria.codigo" v-for="categoria in categorias" :key="categoria.codigo">{{categoria.descripcion}}</option>
-                </select>
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="precioUnidad">Precio Unidad:</label>
+                         <input type="text" placeholder="Precio unidad" v-model="producto.precioUnidad" class="form-control">
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="select">Seleccione categoria:</label>
+                        <select id="select" class="form-select form-control" aria-label="Default select example" v-if="categorias.length > 0" v-model="producto.codigoCategoria">
+                            <option :value="categoria.codigo" v-for="categoria in categorias" :key="categoria.codigo">{{categoria.descripcion}}</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <input type="button" class="btn btn-success form-control" value="Guardar" @click="guardarProducto()">
         </form>
@@ -35,9 +52,10 @@ export default {
         return{
             urlImg:'',
             nombreImagen:'',
-            producto:{},
+            producto:{codigoCategoria:1},
             categorias:[],
-            productos:[]
+            productos:[],
+            urlSinFoto: this.axios.defaults.baseURL + '/imagenes/sin-foto.png'
         }
     },
     created(){
@@ -68,7 +86,7 @@ export default {
             const archivos = $seleccionArchivos.files;
             // Si no hay archivos salimos de la función y quitamos la imagen
             if (!archivos || !archivos.length) {
-                $imagenPrevisualizacion.src = "";
+                $imagenPrevisualizacion.src = this.axios.defaults.baseURL + '/imagenes/sin-foto.png';
                 return;
             }
             // Ahora tomamos el primer archivo, el cual vamos a previsualizar
@@ -87,7 +105,11 @@ export default {
                 console.log(respuesta)
                 this.urlImg = '';
                 const $imagenPrevisualizacion = document.querySelector("#imagenPrevisualizacion");
-                $imagenPrevisualizacion.src = '';
+                const $seleccionArchivos = document.querySelector("#file");
+                console.log($seleccionArchivos)
+                $imagenPrevisualizacion.src = this.axios.defaults.baseURL + '/imagenes/sin-foto.png';
+                $seleccionArchivos.value = '';
+
             })
             .catch(error=>console.log(error))
         },

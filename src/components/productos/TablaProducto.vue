@@ -34,10 +34,10 @@ export default {
      },
      methods:{
           eliminar(producto){
-               this.$router.push({ name: 'productosEliminar', params: { producto }})
+               this.$router.push({ name: 'ProductosEliminar', params: { producto }})
           },
           editar(producto){
-               this.$router.push({ name: 'productosEditar', params: { producto }})
+               this.$router.push({ name: 'ProductosEditar', params: { producto }})
           },
           verFoto(nombreFoto){
                return this.axios.defaults.baseURL + '/imagenes/' + nombreFoto;
