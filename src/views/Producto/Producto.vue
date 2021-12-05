@@ -1,6 +1,5 @@
 <template>
     <div class="text-center">
-        <form @submit.prevent>
 
             <div class="form group">
                 <label for="descripcion">Descripción:</label>
@@ -38,9 +37,29 @@
                         </select>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <label for="select2">Seleccione insumo a utiliar:</label>
+                    <div class="form-group row">
+                        <div class="col-md-9">
+                        <select id="select2" class="form-select form-control" aria-label="Default select example" v-if="insumos.length > 0" v-model="insumoAgregar">
+                            <option :value="insumo" v-for="insumo in insumos" :key="insumo.codigo">{{insumo.descripcion}}</option>
+                        </select>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-primary" @click="agregarInsumo()">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" v-if="insumosGuardar.length > 0">
+                    <h5 class="mb-3">Insumos a utilizar:</h5>
+                    <div class="row mt-2" v-for="i in insumosGuardar" :key="i.codigo">
+                        <div class="col-md-6">{{i.descripcion}}</div>
+                        <div class="col-md-3"><span><input type="text" v-model="i.cantidad" class="form-control" placeholder="cantidad"></span></div>
+                        <div class="col-md-3"><button class="btn btn-danger" @click="eliminarInsumo(i)">X</button></div>
+                    </div>
+                </div>
             </div>
-            <input type="button" class="btn btn-success form-control" value="Guardar" @click="guardarProducto()">
-        </form>
+            <input type="button" class="btn btn-success form-control mt-5" value="Guardar" @click="guardarProducto()">
 
         <TablaProductos :productos="productos" />
     </div>
@@ -55,11 +74,15 @@ export default {
             producto:{codigoCategoria:1},
             categorias:[],
             productos:[],
-            urlSinFoto: this.axios.defaults.baseURL + '/imagenes/sin-foto.png'
+            urlSinFoto: this.axios.defaults.baseURL + '/imagenes/sin-foto.png',
+            insumos: [],
+            insumoAgregar: {},
+            insumosGuardar: []
         }
     },
     created(){
         this.verCategorias()
+        this.verInsumos()
         this.verProductos()
     },
     methods:{
@@ -120,14 +143,21 @@ export default {
                 this.categorias = respuesta.data;
             })
         },
+        verInsumos(){
+            this.axios.get('insumos')
+            .then(respuesta=>{
+                console.log(respuesta.data)
+                this.insumos = respuesta.data;
+                this.insumoAgregar = this.insumos[0]
+            })
+        },
         guardarProducto(){
             if(this.urlImg !== ''){
                 this.producto.foto = this.nombreImagen;
-                console.log(this.producto, 'PRODUCTO GUARDAR')
                 this.axios.post('productos', this.producto)
                 .then(respuesta =>{
                     console.log(respuesta)
-                    window.location = '/productos'
+                    this.guardarProductoInsumo(respuesta.data.codigo)
                 })
             }else{
                 alert('Seleccione una foto')
@@ -140,6 +170,39 @@ export default {
                 this.productos = respuesta.data;
             })
         },
+        agregarInsumo(){
+            this.insumosGuardar.push(this.insumoAgregar)
+        },
+        eliminarInsumo(insumo){
+            let insumos = this.insumosGuardar
+            for(let i of insumos){
+                if(i.codigo === insumo.codigo){
+                    let indice = insumos.indexOf(i)
+                    insumos.splice(indice, 1)
+                    break
+                }
+            }
+            this.insumosGuardar = insumos
+            console.warn(this.insumosGuardar, 'INSUMOS GUARDAR')
+        },
+        guardarProductoInsumo(codigoProductoGuardado){
+            let productosInsumos = []
+            const insumosGuardar = this.insumosGuardar
+            for(let insumo of insumosGuardar){
+                console.log(insumo, 'INSUMO')
+                let productoInsumo = {
+                    codigoProducto: codigoProductoGuardado,
+                    codigoInsumo: insumo.codigo,
+                    cantidad: insumo.cantidad
+                }
+                productosInsumos.push(productoInsumo)
+            }
+            this.axios.post('producto-insumo', productosInsumos)
+            .then(respuesta =>{
+                console.log(respuesta)
+                window.location = '/productos'
+            })
+        }
     },
     components:{
         TablaProductos
