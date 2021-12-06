@@ -78,6 +78,9 @@ h1{
     margin-bottom: 50px;
 }
 
+#navegacion {
+    background-color: #F5F5F5;
+}
 
 .navbar-brand{
     font-size: 25px;
